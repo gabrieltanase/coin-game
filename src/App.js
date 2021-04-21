@@ -5,13 +5,13 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 // STYLES
 import './App.css';
 
+// CONSTANTS
+import { COINS, STATUS } from './constants/coin';
+
 // CHILD COMPONENTS
 import SetupGame from './components/SetupGame';
 import CoinsContainer from './components/CoinsContainer';
 import DropBox from './components/DropBox';
-
-// CONSTANTS
-import { COINS, STATUS } from './constants/coin';
 import Message from './components/Message';
 import RestartGame from './components/RestartGame';
 
@@ -63,6 +63,11 @@ class App extends Component {
     })
   }
 
+  /**
+   * 
+   * @param {number} amount - number of coins to be generated
+   * @returns {Array} Collection of coins items
+   */
   generateCoins(amount) {
     const min = Math.ceil(0),
       max = Math.floor(this.coins.length - 1),
@@ -92,7 +97,7 @@ class App extends Component {
     let totalValue = this.calculateTotalValue(this.state.dropedCoins);
     this.checkForWin(totalValue);
   }
-  
+
   /**
    * Calulates the total value of coins collection
    * @param {Array} coins - collection of coins items
@@ -103,7 +108,7 @@ class App extends Component {
     coins.forEach(coin => {
       totalValue = totalValue + coin.value
     });
-    
+
     return totalValue;
   }
 
@@ -124,7 +129,7 @@ class App extends Component {
     if (value === reqValue) {
       this.setState({ message: 'Congrats!! Your math is great!' })
     }
-    
+
     if (this.state.availableCoins.length === 0) {
       this.setState({ message: ':( No more coins left, Try again!' })
     }
